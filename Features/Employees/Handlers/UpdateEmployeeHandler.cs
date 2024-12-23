@@ -1,9 +1,9 @@
-﻿using DotnetCore.MediatR_testing.Data.Command;
+﻿using DotnetCore.MediatR_testing.Features.Employees.Command;
 using DotnetCore.MediatR_testing.Models;
 using DotnetCore.MediatR_testing.Services.Interface;
 using MediatR;
 
-namespace DotnetCore.MediatR_testing.Data.Handlers
+namespace DotnetCore.MediatR_testing.Features.Employees.Handlers
 {
     public class UpdateEmployeeHandler : IRequestHandler<UpdateEmployeeCommand, int>
     {

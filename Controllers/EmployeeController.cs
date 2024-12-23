@@ -1,5 +1,5 @@
-﻿using DotnetCore.MediatR_testing.Data.Command;
-using DotnetCore.MediatR_testing.Data.Query;
+﻿using DotnetCore.MediatR_testing.Features.Employees.Command;
+using DotnetCore.MediatR_testing.Features.Employees.Query;
 using DotnetCore.MediatR_testing.Models;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -43,7 +43,8 @@ namespace DotnetCore.MediatR_testing.Controllers
         public async Task<Employee> AddEmployee([FromBody] Employee model)
         {
             var employeeRes = await _mediatr.Send(new CreateEmployeeCommand(model.Name, model.Address, model.MobileNumber));
-            return model;
+            _mediatr.
+            return employeeRes;
         }
 
         [HttpPut]

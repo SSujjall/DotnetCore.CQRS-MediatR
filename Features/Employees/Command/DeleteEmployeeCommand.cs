@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace DotnetCore.MediatR_testing.Data.Command
+namespace DotnetCore.MediatR_testing.Features.Employees.Command
 {
     public class DeleteEmployeeCommand : IRequest<int>
     {

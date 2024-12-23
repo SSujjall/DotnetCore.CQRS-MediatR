@@ -1,7 +1,7 @@
 ﻿using DotnetCore.MediatR_testing.Models;
 using MediatR;
 
-namespace DotnetCore.MediatR_testing.Data.Query
+namespace DotnetCore.MediatR_testing.Features.Employees.Query
 {
     public class GetEmployeeByIdQuery : IRequest<Employee>
     {
