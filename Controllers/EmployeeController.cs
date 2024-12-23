@@ -43,7 +43,6 @@ namespace DotnetCore.MediatR_testing.Controllers
         public async Task<Employee> AddEmployee([FromBody] Employee model)
         {
             var employeeRes = await _mediatr.Send(new CreateEmployeeCommand(model.Name, model.Address, model.MobileNumber));
-            _mediatr.
             return employeeRes;
         }
 
