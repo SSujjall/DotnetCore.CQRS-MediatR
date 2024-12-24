@@ -1,6 +1,7 @@
 ﻿using DotnetCore.MediatR_testing.Features.Employees.Command;
 using DotnetCore.MediatR_testing.Features.Employees.Query;
 using DotnetCore.MediatR_testing.Models;
+using DotnetCore.MediatR_testing.Models.DTOs.EmployeeDTOs;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -40,17 +41,17 @@ namespace DotnetCore.MediatR_testing.Controllers
 
         [HttpPost]
         [Route("AddEmployee")]
-        public async Task<Employee> AddEmployee([FromBody] Employee model)
+        public async Task<Employee> AddEmployee([FromBody] AddEmployeeDTO model)
         {
-            var employeeRes = await _mediatr.Send(new CreateEmployeeCommand(model.Name, model.Address, model.MobileNumber));
+            var employeeRes = await _mediatr.Send(new CreateEmployeeCommand(model.Name, model.Address, model.MobileNumber, model.DepartmentId));
             return employeeRes;
         }
 
         [HttpPut]
         [Route("UpdateEmployee")]
-        public async Task<int> UpdateEmployee([FromBody] Employee model)
+        public async Task<int> UpdateEmployee([FromBody] UpdateEmployeeDTO model)
         {
-            var employee = await _mediatr.Send(new UpdateEmployeeCommand(model.Id, model.Name, model.Address, model.MobileNumber));
+            var employee = await _mediatr.Send(new UpdateEmployeeCommand(model.Id, model.Name, model.Address, model.MobileNumber, model.DepartmentId));
             return employee;
         }
 
