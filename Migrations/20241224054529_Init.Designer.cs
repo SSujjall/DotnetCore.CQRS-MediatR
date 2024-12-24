@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotnetCore.MediatR_testing.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241222095052_Init")]
+    [Migration("20241224054529_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -23,6 +23,22 @@ namespace DotnetCore.MediatR_testing.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DotnetCore.MediatR_testing.Models.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Department");
+                });
 
             modelBuilder.Entity("DotnetCore.MediatR_testing.Models.Employee", b =>
                 {
@@ -36,6 +52,9 @@ namespace DotnetCore.MediatR_testing.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("MobileNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -46,7 +65,25 @@ namespace DotnetCore.MediatR_testing.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DepartmentId");
+
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("DotnetCore.MediatR_testing.Models.Employee", b =>
+                {
+                    b.HasOne("DotnetCore.MediatR_testing.Models.Department", "Department")
+                        .WithMany("Employee")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("DotnetCore.MediatR_testing.Models.Department", b =>
+                {
+                    b.Navigation("Employee");
                 });
 #pragma warning restore 612, 618
         }

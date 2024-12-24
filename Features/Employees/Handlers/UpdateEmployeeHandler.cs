@@ -22,6 +22,7 @@ namespace DotnetCore.MediatR_testing.Features.Employees.Handlers
             employee.Name = request.Name;
             employee.Address = request.Address;
             employee.MobileNumber = request.MobileNumber;
+            employee.DepartmentId = request.DepartmentId;
             return await _employeeRepository.UpdateEmployeeAsync(employee);
         }
     }
